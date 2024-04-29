@@ -1,7 +1,7 @@
 {
-  "name": "wizard-game",
+  "name": "rlackbights.github.io",
   "version": "0.1.0",
-  "homepage": "https://RlackBights.github.io/wizard-game/",
+  "homepage": "https://rlackbights.github.io/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -43,7 +43,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
+    "@types/node-sass": "^4.11.7",
     "gh-pages": "^6.1.1",
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.7"
+    "sass": "^1.75.0"
   }
 }
