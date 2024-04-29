@@ -11,3 +11,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#text-input {
+  margin: 0 20%;
+}
+
+#add-deck {
+  margin: 0 40%;
+}
+
+#decks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.deck {
+  border: 0.5vmin solid black;
+  border-radius: 2rem;
+  padding: 2vmin;
+  box-sizing: border-box;
+  min-width: 25%;
+  width: fit-content;
+  min-height: 30vh;
+  margin: 3vmin;
+  margin-top: 5vmin;
+}
+
+.deck > p {
+  font-size: 3vmin;
+  margin: 0;
+  font-weight: bold;
+  font-style: italic;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5vmin;
+}
+
+.deck > textarea {
+  border-radius: 1rem;
+  padding: 1vmin;
+  box-sizing: border-box;
+  position: relative;
+  margin: 0;
+  border: 0.2vmin solid black;
+}
+
+.deck > textarea::-webkit-resizer {
+  background-image: url(assets/chevron.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
