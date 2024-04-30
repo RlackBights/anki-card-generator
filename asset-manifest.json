@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/anki-card-generator/static/css/main.6e6f9b78.css",
-    "main.js": "/anki-card-generator/static/js/main.f9179db5.js",
+    "main.css": "/anki-card-generator/static/css/main.88400c06.css",
+    "main.js": "/anki-card-generator/static/js/main.3b9cc6ad.js",
     "static/media/chevron.png": "/anki-card-generator/static/media/chevron.bbfd54ff76c6bc0e5578.png",
     "index.html": "/anki-card-generator/index.html",
-    "main.6e6f9b78.css.map": "/anki-card-generator/static/css/main.6e6f9b78.css.map",
-    "main.f9179db5.js.map": "/anki-card-generator/static/js/main.f9179db5.js.map"
+    "main.88400c06.css.map": "/anki-card-generator/static/css/main.88400c06.css.map",
+    "main.3b9cc6ad.js.map": "/anki-card-generator/static/js/main.3b9cc6ad.js.map"
   },
   "entrypoints": [
-    "static/css/main.6e6f9b78.css",
-    "static/js/main.f9179db5.js"
+    "static/css/main.88400c06.css",
+    "static/js/main.3b9cc6ad.js"
   ]
 }
