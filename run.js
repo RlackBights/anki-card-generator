@@ -1,6 +1,13 @@
 const execSync = require("child_process").execSync;
 
-const arg = process.argv.slice(2).join(' ') || "Updates";
+const args = process.argv.slice(2);
 
-execSync('react-scripts build && gh-pages -d build -b build', { stdio: [0, 1, 2] });
-execSync(`git add . && git commit -m "${arg}" && git push`, { stdio: [0, 1, 2] });
+if (args.length === 0) {
+    console.error('\x1b[91m[ERROR] Please provide a commit message\x1b[0m');
+} else {
+    execSync('react-scripts build && gh-pages -d build -b build', { stdio: [0, 1, 2] });
+    execSync(`git add . && git commit -m "${args.join(' ')}" && git push`, { stdio: [0, 1, 2] });
+}
+
+/*
+*/
