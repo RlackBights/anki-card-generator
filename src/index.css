@@ -12,13 +12,18 @@ code {
     monospace;
 }
 
-.container {
+body {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+#container {
+  overflow-x: hidden;
+  transition: all 0.25s linear;
 }
 
 #text-input {
@@ -48,6 +53,7 @@ code {
   min-height: 30vh;
   margin: 3vmin;
   margin-top: 5vmin;
+  user-select: none;
 }
 
 .deck > p {
@@ -73,4 +79,46 @@ code {
   background-image: url(assets/chevron.png);
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+#popup {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #22222266;
+}
+
+#popup > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2vmin;
+  border: 0.5vmin solid black;
+  border-radius: 1rem;
+  padding: 2vmin;
+  min-width: 30%;
+  width: fit-content;
+  height: fit-content;
+}
+
+#popup input[type="text"] {
+  outline: none;
+  background-color: transparent;
+  border: 0.1vmin solid black;
+  border-radius: 1rem;
+  padding: 0.5vmin 1vmin;
+  color: white;
+}
+
+#popup h2 {
+  margin: 0;
+}
+
+#popup p {
+  margin: 0;
 }

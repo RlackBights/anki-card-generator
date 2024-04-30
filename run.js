@@ -8,6 +8,3 @@ if (args.length === 0) {
     execSync('react-scripts build && gh-pages -d build -b build', { stdio: [0, 1, 2] });
     execSync(`git add . && git commit -m "${args.join(' ')}" && git push`, { stdio: [0, 1, 2] });
 }
-
-/*
-*/
