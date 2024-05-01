@@ -1,19 +1,19 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, Dispatch } from 'react';
 import Deck from './components/deck';
 import Popup from './components/popup';
 
 export const deckContext = createContext({
   decks: [] as Array<DeckBase>,
-  setDecks: (decks: Array<DeckBase>) => {}
+  setDecks: (()=>{}) as Dispatch<React.SetStateAction<DeckBase[]>>
 });
 
 function App() {
-  const [decks, setDecks] = useState<Array<DeckBase>>([{name: "test", content: []}]);
-  const [popup, setPopup] = useState<{content: string, type: PopupType}>({content: "", type: null});
+  const [decks, setDecks] = useState<Array<DeckBase>>([{name: "test", content: []} as DeckBase]);
+  const [popup, setPopup] = useState<PopupInfo>({content: "", type: null, deckIntex: null} as PopupInfo);
 
   return (
-    <>
-      <Popup content={popup.content} type={popup.type} setter={setPopup} />
+    <deckContext.Provider value={{ decks, setDecks }}>
+      <Popup content={popup.content} type={popup.type} deckIndex={popup.deckIndex} setter={setPopup}/>
       <form id="container" onSubmit={e => e.preventDefault()}>
         <h1>Anki Card Generator</h1>
         <p>A site for making it easy to generate anki cards from plain text, like dictionaries</p>
@@ -28,23 +28,25 @@ function App() {
           }}>Add a deck</button>
         </div>
         <div id='decks'>
-          <deckContext.Provider value={{ decks, setDecks }}>
-            {decks.map((deck) => (
+            {decks.map((deck, index) => (
               <Deck
                 deckInfo={deck as DeckBase}
                 removeMethod={() => {
-                  setDecks(currDecks => currDecks.filter(anyDeck => anyDeck.name !== deck.name));;
+                  setDecks(currDecks => currDecks.filter(anyDeck => anyDeck.name !== deck.name));
                 }} key={deck.name}
                 renameMethod={() => {
-                  setPopup({content: "Rename deck", type: "textInput"});
-                }}    
+                  setPopup({content: "Rename deck", type: "textInput", setter: (()=>{}), deckIndex: index} as PopupInfo);
+                }}
+                changeMethod={(value: string) => {
+                  const newcontent = value.split('\n').map(line => ({from: line.split(' ')[0], to: line.split(' ').slice(1).join(' '), confidence: line.split(' ').length}));
+                  console.table(newcontent);
+                  setDecks(currDecks => [...currDecks].fill({name: deck.name, content: [{from: "", to: "", confidence: 0}]} as DeckBase, index, index + 1) as DeckBase[]);
+                }}
               />
             ))}
-          </deckContext.Provider>
         </div>
       </form>
-    </>
-    
+    </deckContext.Provider>
   );
 }
 

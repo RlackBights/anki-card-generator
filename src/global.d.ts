@@ -7,7 +7,14 @@ interface PopupBase {
     type: PopupType;
 }
 
+interface PopupInfo {
+    content: string;
+    type: PopupType;
+    setter?: React.Dispatch<React.SetStateAction<PopupBase>>;
+    deckIndex?: number | undefined;
+}
+
 interface DeckBase {
     name: string;
-    content: Array<{from: string, to: string}>;
+    content: Array<{from: string, to: string, confidence: number}>;
 }
