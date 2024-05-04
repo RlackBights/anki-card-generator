@@ -1,6 +1,7 @@
 /// <reference types="react-scripts" />
 
 type PopupType = "ok" | "yesNo" | "error" | "textInput" | null;
+type DeckState = "edit" | "finished";
 
 interface PopupBase {
     content:string;
@@ -16,5 +17,7 @@ interface PopupInfo {
 
 interface DeckBase {
     name: string;
-    content: Array<{from: string, to: string, confidence: number}>;
+    rawContent: string;
+    content: Array<{from: string, to: string, splitIndex: number, confidence: number, accepted: boolean}>;
+    state: DeckState; 
 }

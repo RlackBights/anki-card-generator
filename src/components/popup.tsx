@@ -23,7 +23,7 @@ export default function Popup({ content, type, setter = ()=>{}, deckIndex = unde
                     setInput(e.target.value);
                 }}/>}
                 {type === "textInput" && <button type="button" onClick={() => {
-                    setDecks((currDecks: DeckBase[]) => [...currDecks].fill({name:  (!currDecks.map(base => base.name).includes(input)) ? input : currDecks[deckIndex!].name, content: currDecks[deckIndex!].content} as DeckBase, deckIndex!, deckIndex! + 1) as DeckBase[]);
+                    setDecks((currDecks: DeckBase[]) => [...currDecks].fill({...currDecks[deckIndex!], name: (!currDecks.map(base => base.name).includes(input)) ? input : currDecks[deckIndex!].name} as DeckBase, deckIndex!, deckIndex! + 1) as DeckBase[]);
                     setter({content: "", type: null} as PopupBase);
                 }}>Ok</button>}
             </form>

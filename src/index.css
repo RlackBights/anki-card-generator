@@ -36,6 +36,7 @@ body {
 
 #decks {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -44,6 +45,7 @@ body {
 }
 
 .deck {
+  position: relative;
   border: 0.5vmin solid black;
   border-radius: 2rem;
   padding: 2vmin;
@@ -79,6 +81,29 @@ body {
   background-image: url(assets/chevron.png);
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.slide-btn {
+  position: absolute;
+  right: 2vmin;
+  outline: none;
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 2vmin;
+  cursor: pointer;
+}
+
+.slide-up-btn {
+  top: 2vmin;
+}
+
+.slide-down-btn {
+  bottom: 2vmin;
+}
+
+.deck:first-of-type .slide-up-btn, .deck:last-of-type .slide-down-btn, .finished-line:first-of-type .merge-btn {
+  display: none;
 }
 
 #popup {
@@ -122,3 +147,46 @@ body {
 #popup p {
   margin: 0;
 }
+
+#finished-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 0 2vmin;
+  width: fit-content;
+  height: 100%;
+  background-color: lightgray;
+  border: 0.3vmin solid gray;
+  border-radius: 1rem;
+}
+
+.finished-line {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  font-size: 2.5vmin;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.finished-line:not([confidence="true"]) {
+  color: red;
+  font-style: italic;
+}
+
+.finished-line button {
+  background: none;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.finished-line button:disabled {
+  cursor: default;
+}
+
