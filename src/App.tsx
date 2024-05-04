@@ -6,14 +6,17 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
 
-function download(downloadDecks: Array<{deckName: string, from: Array<string>, to: Array<string>}>) {
+function download(downloadDecks: Array<{deckName: string, from: Array<string>, to: Array<string>}>, special?: any) {
   let element = document.createElement('a');
-  let outputString = "#separator:tab\n#html:true\n#notetype column:1\n#deck column:2\n#tags column:5\n";
-  downloadDecks.forEach(deck => {
-    for (let i = 0; i < deck.from.length; i++) {
-      outputString += `Basic (and reversed card)\t${deck.deckName}\t${deck.from[i]}\t${deck.to[i]}\t\n`;
-    }
-  });
+  let outputString = special ? JSON.stringify(special) : "#separator:tab\n#html:true\n#notetype column:1\n#deck column:2\n#tags column:5\n";
+  
+  if (!special) {
+    downloadDecks.forEach(deck => {
+      for (let i = 0; i < deck.from.length; i++) {
+        outputString += `Basic (and reversed card)\t${deck.deckName}\t${deck.from[i]}\t${deck.to[i]}\t\n`;
+      }
+    });
+  }
   
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(outputString));
   element.setAttribute('download', 'anki-deck-import.txt');
@@ -51,7 +54,8 @@ function App() {
             setDecks(currDecks => [...currDecks, newDeck]);
           }}>Add a deck</button>
         </div>
-        <button onClick={() => {download(decks.filter(deck => deck.state === "finished").map(deck => ({deckName: deck.name, from: deck.content.filter(line => line.accepted === true).map(line => line.from), to: deck.content.filter(line => line.accepted === true).map(line => line.to)})))}}>Download finalised decks</button>
+        <button onClick={() => {download(decks.filter(deck => deck.state === "finished").map(deck => ({deckName: deck.name, from: deck.content.filter(line => line.accepted === true).map(line => line.from), to: deck.content.filter(line => line.accepted === true).map(line => line.to)})), false)}}>Download finalised decks</button>
+        
         <div id='decks'>
             {decks.map((deck, index) => (
               <Deck
@@ -123,6 +127,11 @@ function App() {
                 }}
               />
             ))}
+        </div>
+        <div style={{display: !window.location.href.includes("debug") ? "none" : "block"}}>
+          <button onClick={() => {download([], decks)}}>Download states</button>
+          <textarea id="stateUpload" cols={30} rows={5}></textarea>
+          <button onClick={() => {setDecks(JSON.parse((document.getElementById("stateUpload") as HTMLTextAreaElement).value))}}>Upload states</button>
         </div>
       </form>
     </deckContext.Provider>
