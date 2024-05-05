@@ -111,7 +111,7 @@ function App() {
                   let newRawContent = tempRawContent.join('\n')
                   setDecks(currDecks => [...currDecks].fill({...currDecks[index], rawContent: newRawContent, content: newContent} as DeckBase, index, index + 1) as DeckBase[]);
                 }}
-
+                
                 slideMethod={(isDown: boolean) => {
                   let tempDecks = [...decks];
                   if (isDown) {
